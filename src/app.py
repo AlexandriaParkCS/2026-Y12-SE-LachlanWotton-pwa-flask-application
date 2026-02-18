@@ -1,25 +1,27 @@
 import logging
+import json
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask import render_template
 from flask import request
 from flask import redirect
 from flask_wtf import CSRFProtect
 from flask_csp.csp import csp_header
 
-from sqldb import SqlDb
+import sqlite3
 # OR
 # from ormdb import OrmDb
 
 log = logging.getLogger(__name__)
 logging.basicConfig(
-    filename="../runtime/log/app.log",
+    filename="./runtime/log/app.log",
     encoding="utf-8",
     level=logging.DEBUG,
     format=" %(asctime)s %(message)s",
 )
 
-sql_db = SqlDb("../runtime/db/sql.db")
+sql_db = sqlite3.connect("./runtime/db/sql.db")
+
 # OR
 # orm_db = OrmDb("../runtime/db/orm.db")
 
@@ -65,6 +67,46 @@ def index():
 def privacy():
     return render_template("/privacy.html")
 
+@app.route("/dashboard.html", methods=["GET"])
+def dashboard():
+    return render_template("/dashboard.html")
+
+@app.route("/task_viewer.html", methods=["GET"])
+def task_viewer():
+    return render_template("/task_viewer.html")
+
+@app.route("/return_data/<query>", methods=["GET"])
+def return_data(query):
+    db = sqlite3.connect("./runtime/db/sql.db")
+    cursor = db.cursor()
+    if query == '*':
+        cursor.execute("SELECT * FROM tasks")
+        rows = cursor.fetchall()
+        # Get column names from the cursor description
+        columns = [description[0] for description in cursor.description]
+        # Convert the list of tuples (rows) into a list of dictionaries
+        results = [dict(zip(columns, row)) for row in rows]
+        response = results
+        app.logger.info(response)
+        with open("dump.json", "w") as f:
+            json.dump(results, f, indent=4)
+    else:
+        cursor.execute("SELECT * FROM tasks")
+        rows = cursor.fetchall()
+        # Get column names from the cursor description
+        columns = [description[0] for description in cursor.description]
+        # Convert the list of tuples (rows) into a list of dictionaries
+        results = [dict(zip(columns, row)) for row in rows]
+        response = results
+        app.logger.info(response)
+        with open("dump.json", "w") as f:
+            json.dump(results, f, indent=4)
+    return response
+
+@app.route("/task_maker.html", methods=["GET"])
+def task_maker():
+    return render_template("/task_maker.html")
+
 @app.route("/form.html", methods=["POST", "GET"])
 def form():
     if request.method == "POST":
@@ -84,4 +126,5 @@ def csp_report():
 
 if __name__ == "__main__":
     # app.logger.debug("Started")
+    logging.basicConfig(level=logging.INFO)
     app.run(debug=True, host="0.0.0.0", port=5000)

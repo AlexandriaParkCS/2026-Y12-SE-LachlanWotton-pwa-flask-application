@@ -1,0 +1,18 @@
+[
+    {
+        "Name": "CS Homework Task 1",
+        "due_date": "2026-01-01",
+        "course": "Computer Science",
+        "earned_marks": 0,
+        "Percent": 0,
+        "total_marks": 10
+    },
+    {
+        "Name": "Art Homework Task 1",
+        "due_date": "2026-01-01",
+        "course": "Visual Art",
+        "earned_marks": 0,
+        "Percent": 0,
+        "total_marks": 10
+    }
+]

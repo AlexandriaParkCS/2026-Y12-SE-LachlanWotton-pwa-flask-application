@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1 class="display-1">Task Viewer</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <table id = tableBody> 
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Due Date</th>
+                    <th>Course</th>
+                    <th>Score</th>
+                    <th>Score Percent</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Example Task</td>
+                    <td>01/01/2026</td>
+                    <td>Computer Science</td>
+                    <td>0/100</td>
+                    <td>0%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../static/js/table_generator.js">genTable()</script>
+</div>
+{% endblock %}
