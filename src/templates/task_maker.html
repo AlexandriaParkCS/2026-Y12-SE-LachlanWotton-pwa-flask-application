@@ -1,12 +1,47 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="container">
-    <div class="row">
-        <h1 class="display-1">Task Maker</h1>
-    </div>
-    <hr>
-    <div class="row">
-        <p>Welcome to the StudyVision Dashboard</p>
-    </div>
+  <div class="row">
+    <h1 class=display-1>Task Maker</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <form action="/task_maker.html" method="POST" class="box">
+      <div class="col-auto">
+        <label name="nameInput" class="form-label">Task Name</label>
+        <input name="name" class="form-control" id="nameInput" placeholder="Assessment Task 1">
+      </div>
+      <div class="col-auto">
+        <label for="dueDateInput" class="form-label">Due Date</label>
+        <input name="dueDate" type="date" class="form-control" id="dueDateInput" placeholder="YYYY-MM-DD">
+      </div>
+      <div class="col-auto">
+        <label for="course" class="form-label">Course</label>
+        <input name="course"  class="form-control" id="courseInput" placeholder="Computer Science">
+      </div>
+      <div class="col-auto">
+        <label for="typeInput" class="form-label">Task Type</label>
+        <input name="type" class="form-control" id="typeInput" placeholder="Homework/Assessment">
+      </div>
+      <div class="col-auto">
+        <label for="formatInput" class="form-label">Task Form</label>
+        <input name="format" class="form-control" id="formatInput" placeholder="Hand in/Test/Written Exam/In Class">
+      </div>
+      <div class="col-auto">
+        <label for="marksInput" class="form-label">Marks</label>
+        <input name="marks" class="form-control" id="marksInput" placeholder="Hand in/Test/Written Exam/In Class">
+      </div>
+      <div class="col-auto">
+        <label for="weightingInput" class="form-label">Weighting</label>
+        <input name="weighting" class="form-control" id="weightingInput" placeholder="Hand in/Test/Written Exam/In Class">
+      </div>
+      <br/>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+      </div>
+      <input type="hidden" name="csrf_token" value = "{{ csrf_token() }}" />
+    </form>
+  </div>
 </div>
 {% endblock %}

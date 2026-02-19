@@ -13,6 +13,7 @@ p {
 }
 
 .button {
+    margin-right: 35px;
   background-color: #cbcbcb; /* Red background */
   color: rgb(0, 0, 0); /* White text */
   padding: 14px 25px; /* Spacing inside the button */
@@ -28,23 +29,34 @@ p {
     color: rgb(255, 255, 255);
 }
 
-table, th, td {
-    border-bottom: 1px solid #000000;
+/*Table Styling */
+
+table{
+    border: 1px solid #000000;
+    margin-bottom: 35px;
+}
+th, td {
+    border-collapse: separate;
+    border-bottom: 2px solid #000000;
     border: 1px solid #000000;
 }
-
 tr:nth-child(even) {background-color: #f2f2f2;}
-
 th {
   background-color: #006741;
   color: white;
 }
-
-tr:hover {background-color: rgb(174, 76, 76);}
-
+td:hover {background-color: rgb(170, 177, 206);}
+tr:hover {background-color: rgb(217, 221, 237);}
+th:hover {background-color: #0e9c68;}
 th, td {
   padding: 10px;
   text-align: left;
+}
+
+
+/*Misc Stylization*/
+col-auto {
+    margin-bottom: 10px;
 }
 
 .container {

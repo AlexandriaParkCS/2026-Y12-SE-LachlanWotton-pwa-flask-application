@@ -12,6 +12,8 @@
                     <th>Task Name</th>
                     <th>Due Date</th>
                     <th>Course</th>
+                    <th>Task Type</th>
+                    <th>Task Form</th>
                     <th>Score</th>
                     <th>Score Percent</th>
                 </tr>
@@ -21,12 +23,25 @@
                     <td>Example Task</td>
                     <td>01/01/2026</td>
                     <td>Computer Science</td>
+                    <td>Homework Task</td>
+                    <td>Hand-In</td>
                     <td>0/100</td>
                     <td>0%</td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <div>  
+        <a class="button" href="task_maker.html">Create new Task</a>
+        <a class="button" href="dashboard.html">Return to Dashboard</a>
+        <button onclick="document.getElementById('scoreInput').showModal()">Open Dialog</button>
+    </div>
+        <dialog id="scoreInput">
+            <p>//PLACEHOLDER//</p>
+            
+            <button onclick="document.getElementById('myDialog').close()">Confirm</button>
+        </dialog>
     <script src="../static/js/table_generator.js">genTable()</script>
 </div>
 {% endblock %}

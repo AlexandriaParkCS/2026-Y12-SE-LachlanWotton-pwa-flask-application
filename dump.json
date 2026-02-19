@@ -3,16 +3,55 @@
         "Name": "CS Homework Task 1",
         "due_date": "2026-01-01",
         "course": "Computer Science",
+        "type": "Homework",
+        "format": null,
         "earned_marks": 0,
+        "total_marks": 10,
         "Percent": 0,
-        "total_marks": 10
+        "Weighting": null
     },
     {
         "Name": "Art Homework Task 1",
         "due_date": "2026-01-01",
         "course": "Visual Art",
+        "type": "Homework",
+        "format": null,
         "earned_marks": 0,
+        "total_marks": 10,
         "Percent": 0,
-        "total_marks": 10
+        "Weighting": null
+    },
+    {
+        "Name": "CS Assessment 1",
+        "due_date": "2026-01-01",
+        "course": "Computer Science",
+        "type": "Assessment",
+        "format": null,
+        "earned_marks": 0,
+        "total_marks": 10,
+        "Percent": 0,
+        "Weighting": null
+    },
+    {
+        "Name": "Art Assessment 1",
+        "due_date": "2026-01-01",
+        "course": "Visual Art",
+        "type": "Assessment",
+        "format": null,
+        "earned_marks": 0,
+        "total_marks": 10,
+        "Percent": 0,
+        "Weighting": null
+    },
+    {
+        "Name": "test",
+        "due_date": "2026-01-01",
+        "course": "",
+        "type": "",
+        "format": "",
+        "earned_marks": 0,
+        "total_marks": "",
+        "Percent": 0,
+        "Weighting": ""
     }
 ]

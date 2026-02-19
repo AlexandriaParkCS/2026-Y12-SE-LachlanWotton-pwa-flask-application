@@ -1,7 +1,7 @@
 import logging
 import json
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, url_for
 from flask import render_template
 from flask import request
 from flask import redirect
@@ -20,7 +20,6 @@ logging.basicConfig(
     format=" %(asctime)s %(message)s",
 )
 
-sql_db = sqlite3.connect("./runtime/db/sql.db")
 
 # OR
 # orm_db = OrmDb("../runtime/db/orm.db")
@@ -91,7 +90,7 @@ def return_data(query):
         with open("dump.json", "w") as f:
             json.dump(results, f, indent=4)
     else:
-        cursor.execute("SELECT * FROM tasks")
+        cursor.execute("SELECT * FROM tasks WHERE course = ?", query)
         rows = cursor.fetchall()
         # Get column names from the cursor description
         columns = [description[0] for description in cursor.description]
@@ -101,18 +100,35 @@ def return_data(query):
         app.logger.info(response)
         with open("dump.json", "w") as f:
             json.dump(results, f, indent=4)
+    db.close()
     return response
 
-@app.route("/task_maker.html", methods=["GET"])
+@app.route("/task_maker.html", methods=["POST", "GET"])
 def task_maker():
-    return render_template("/task_maker.html")
+    db = sqlite3.connect("./runtime/db/sql.db")
+    cursor = db.cursor()
+    if request.method == "POST":
+        name = request.form["name"]
+        due = request.form["dueDate"]
+        course = request.form["course"]
+        type = request.form["type"]
+        format = request.form["format"]
+        marks = request.form["marks"]
+        weighting = request.form["weighting"]
+        cursor.execute("INSERT INTO tasks(name, due_date, course, type, format, earned_marks, total_marks, percent, weighting) VALUES (?, ?, ?, ?, ?, 0, ?, 0, ?)", [name, due, course, type, format, marks, weighting] )
+        db.commit()
+        db.close()
+        return redirect(url_for('task_viewer'))
+    else:
+        db.close()
+        return render_template("/task_maker.html")
 
 @app.route("/form.html", methods=["POST", "GET"])
 def form():
     if request.method == "POST":
         email = request.form["email"]
         text = request.form["text"]
-        print(f"<From(email={email}, text='{text}')>")
+        app.logger.info(f"<From(email={email}, text='{text}')>")
         return render_template("/form.html")
     else:
         return render_template("/form.html")
